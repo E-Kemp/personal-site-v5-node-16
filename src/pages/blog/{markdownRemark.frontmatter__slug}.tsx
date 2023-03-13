@@ -1,15 +1,22 @@
 import * as React from 'react'
-import { graphql, PageProps } from 'gatsby'
-import Layout from '../../components/layout'
-import { Typography } from '@mui/material'
+import { graphql, PageProps, HeadFC } from 'gatsby'
+import { Layout, Breadcrumbs } from '../../components'
 
 const BlogPostTemplate: React.FC<PageProps> = ({ data }) => {
-  const { markdownRemark } = data
+  const { markdownRemark }: any = data
   const { frontmatter, html } = markdownRemark
+  const crumbs = [
+    {
+      label: 'Home',
+      to: '/'
+    },
+    { label: 'Blog', to: '/blog' },
+    { label: frontmatter.title }
+  ]
   return (
-    <Layout>
-      <Typography variant="h3">{frontmatter.title}</Typography>
-      <Typography variant="h6">{frontmatter.date}</Typography>
+    <Layout breadcrumbs={crumbs}>
+      <h1 className="mt-5 mb-2">{frontmatter.title}</h1>
+      <span>{frontmatter.date}</span>
       <div dangerouslySetInnerHTML={{ __html: html }} />
     </Layout>
   )
@@ -30,3 +37,9 @@ export const pageQuery = graphql`
 `
 
 export default BlogPostTemplate
+
+export const Head: HeadFC = ({ data }) => {
+  const { markdownRemark }: any = data
+  const { frontmatter } = markdownRemark
+  return <title>{`Blog: ${frontmatter.title}`}</title>
+}

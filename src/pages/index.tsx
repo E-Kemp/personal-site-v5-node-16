@@ -1,55 +1,44 @@
 import * as React from 'react'
-import type { HeadFC, PageProps } from 'gatsby'
-import { Box, Card, Link, Paper, Typography } from '@mui/material'
-import Layout from '../components/layout'
-import Grid2 from '@mui/material/Unstable_Grid2/Grid2'
+import { HeadFC, PageProps, Link } from 'gatsby'
+import { Layout, MyLink } from '../components'
 
 const IndexPage: React.FC<PageProps> = () => {
   return (
-    <Layout vc hc>
-      <Typography variant="h2" component="h2">
-        Elliot Jordan Kemp
-      </Typography>
-      <Typography variant="body1" component="p">
-        This is where I do things.
-      </Typography>
-
-      <Card
-        variant="outlined"
-        elevation={3}
-        sx={{ marginTop: '40px', padding: '20px' }}
-      >
-        <Typography variant="body1" component="p">
-          Why not look at these links?
-        </Typography>
-        <Grid2 container spacing={3} direction="row" justifyContent="center">
-          <Grid2>
-            <Link href="/blog" aria-label="Link to my blog.">
+    <Layout hc vc>
+      <h1 className="my-5">Elliot Jordan Kemp</h1>
+      <h3 className="my-5">This is where I do things.</h3>
+      <div className="flex flex-col rounded-lg border-slate-800 bg-slate-600 p-5 text-white">
+        <p className="my-1">Why not look at these links?</p>
+        <div className="flex flex-row items-center justify-between">
+          <div>
+            <Link
+              to="/blog"
+              aria-label="Link to my blog posts"
+              className="text-slate-50 visited:text-slate-300"
+            >
               Blog
             </Link>
-          </Grid2>
-          <Grid2>
-            <Link
-              target="_blank"
-              referrerPolicy="no-referrer"
+          </div>
+          <div>
+            <MyLink
               href="https://www.linkedin.com/in/elliotjordankemp/"
               aria-label="Link to my LinkedIn profile."
+              className="text-slate-50 visited:text-slate-300"
             >
               LinkedIn
-            </Link>
-          </Grid2>
-          <Grid2>
-            <Link
-              target="_blank"
-              referrerPolicy="no-referrer"
+            </MyLink>
+          </div>
+          <div>
+            <MyLink
               href="https://github.com/E-Kemp"
               aria-label="Link to my Github page."
+              className="text-slate-50 visited:text-slate-300"
             >
               GitHub
-            </Link>
-          </Grid2>
-        </Grid2>
-      </Card>
+            </MyLink>
+          </div>
+        </div>
+      </div>
     </Layout>
   )
 }

@@ -1,37 +1,35 @@
-import { Box, styled } from '@mui/material'
 import React from 'react'
-import Footer from './footer'
+import { Breadcrumbs } from './breadcrumbs'
+import { Footer } from './footer'
 import './layout.css'
 
-type Props = { children: React.ReactNode; hc?: boolean; vc?: boolean }
+type Breadcrumb = {
+  label: string
+  to?: string
+}
+type Props = {
+  children: React.ReactNode
+  breadcrumbs?: Breadcrumb[]
+  hc?: boolean
+  vc?: boolean
+}
 
-const Main = styled(Box)({ flexGrow: 1 })
-
-const Layout = ({ children, hc, vc }: Props) => {
+const Layout = ({ children, breadcrumbs, hc, vc }: Props) => {
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        minHeight: '100vh',
-        width: '100vw',
-      }}
-    >
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          flexGrow: 1,
-          justifyContent: vc ? 'center' : 'flex-start',
-          alignItems: hc ? 'center' : 'flex-start',
-          padding: '30px'
-        }}
-      >
-        {children}
-      </Box>
+    <div className="flex min-h-screen flex-col items-center">
+      <div className="prose flex w-full grow flex-col p-5">
+        {breadcrumbs && <Breadcrumbs crumbs={breadcrumbs} />}
+        <div
+          className={`flex flex-col ${vc && 'justify-center'} ${
+            hc && 'items-center'
+          }`}
+        >
+          {children}
+        </div>
+      </div>
       <Footer />
-    </Box>
+    </div>
   )
 }
 
-export default Layout
+export { Layout }

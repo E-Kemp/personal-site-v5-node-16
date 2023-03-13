@@ -1,28 +1,15 @@
-import { backdropClasses, Box, Link, Typography } from '@mui/material'
-import Grid2 from '@mui/material/Unstable_Grid2/Grid2'
 import React from 'react'
-import theme from '../../theme'
 
 const Footer = () => {
   return (
-    <Grid2
-      container
-      justifyContent="space-between"
-      alignItems="center"
-      sx={{
-        minWidth: '100%',
-        height: '100px',
-        paddingX: '40px',
-        backgroundColor: theme.palette.primary.dark
-      }}
-    >
-      <Grid2>
-        <Typography>Elliot Jordan Kemp</Typography>
-      </Grid2>
-      <Grid2>
-        <Typography>
+    <div className="flex h-20 w-screen grow-0 flex-row items-center justify-between bg-slate-600 p-5 text-white">
+      <div>
+        <p>Elliot Jordan Kemp</p>
+      </div>
+      <div>
+        <p>
           Powered by{' '}
-          <Link
+          <a
             target="_blank"
             referrerPolicy="no-referrer"
             href="https://www.gatsbyjs.com/"
@@ -30,11 +17,11 @@ const Footer = () => {
             color={'#fff'}
           >
             GatsbyJS
-          </Link>
-        </Typography>
-      </Grid2>
-    </Grid2>
+          </a>
+        </p>
+      </div>
+    </div>
   )
 }
 
-export default Footer
+export { Footer }

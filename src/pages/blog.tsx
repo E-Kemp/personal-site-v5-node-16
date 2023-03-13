@@ -1,8 +1,6 @@
 import * as React from 'react'
-import { graphql, HeadFC, PageProps } from 'gatsby'
-import { Box, Card, Link, List, Paper, Typography } from '@mui/material'
-import Layout from '../components/layout'
-import Grid2 from '@mui/material/Unstable_Grid2/Grid2'
+import { graphql, HeadFC, PageProps, Link } from 'gatsby'
+import { Layout } from '../components'
 
 interface BlogPageProps {
   allMarkdownRemark: {
@@ -21,16 +19,31 @@ interface BlogPageProps {
 const BlogPage: React.FC<PageProps<BlogPageProps>> = ({ data }) => {
   const { allMarkdownRemark } = data
   const posts = allMarkdownRemark.edges
+  const crumbs = [
+    {
+      label: 'Home',
+      to: '/'
+    },
+    { label: 'Blog' }
+  ]
   return (
-    <Layout vc>
-      <Typography variant="h3" gutterBottom>
-        Blog
-      </Typography>
-      {posts.map(({ node: { frontmatter } }) => (
-        <Link key={frontmatter.title} href={`/blog${frontmatter.slug}`}>
-          {frontmatter.title}
-        </Link>
-      ))}
+    <Layout breadcrumbs={crumbs} vc>
+      <h3>Blog</h3>
+      <ul>
+        {posts.map(({ node: { frontmatter } }) => (
+          <li>
+            <Link
+              key={frontmatter.title}
+              to={`/blog${frontmatter.slug}`}
+              aria-label={frontmatter.title}
+            >
+              {frontmatter.title}
+            </Link>
+            {' / '}
+            {frontmatter.date}
+          </li>
+        ))}
+      </ul>
     </Layout>
   )
 }
@@ -41,7 +54,7 @@ export const pageQuery = graphql`
       edges {
         node {
           frontmatter {
-            date
+            date(formatString: "MMMM DD, YYYY")
             slug
             title
           }
@@ -53,4 +66,4 @@ export const pageQuery = graphql`
 
 export default BlogPage
 
-export const Head: HeadFC = () => <title>Home Page</title>
+export const Head: HeadFC = () => <title>Blog</title>
