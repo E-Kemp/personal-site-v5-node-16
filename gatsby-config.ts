@@ -18,7 +18,15 @@ const config: GatsbyConfig = {
         path: './src/content/'
       }
     },
-    'gatsby-transformer-remark'
+    'gatsby-transformer-remark',
+    {
+      resolve: 'gatsby-plugin-react-svg',
+      options: {
+        rule: {
+          include: /assets/
+        }
+      }
+    }
   ]
 }
 

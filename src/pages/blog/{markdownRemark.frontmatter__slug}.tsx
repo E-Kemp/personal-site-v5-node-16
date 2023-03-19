@@ -2,28 +2,29 @@ import * as React from 'react'
 import { graphql, PageProps, HeadFC } from 'gatsby'
 import { Layout, Breadcrumbs } from '../../components'
 
-const BlogPostTemplate: React.FC<PageProps> = ({ data }) => {
-  const { markdownRemark }: any = data
-  const { frontmatter, html } = markdownRemark
+const BlogPostTemplate = ({ data }: PageProps<Queries.BlogTemplateQuery>) => {
+  const { markdownRemark } = data
+  const frontmatter = markdownRemark?.frontmatter ?? null
+  const html = markdownRemark?.html ?? null
   const crumbs = [
     {
       label: 'Home',
       to: '/'
     },
     { label: 'Blog', to: '/blog' },
-    { label: frontmatter.title }
+    { label: frontmatter?.title ?? '' }
   ]
   return (
     <Layout breadcrumbs={crumbs}>
-      <h1 className="mt-5 mb-2">{frontmatter.title}</h1>
-      <span>{frontmatter.date}</span>
-      <div dangerouslySetInnerHTML={{ __html: html }} />
+      <h1 className="mt-5 mb-2">{frontmatter?.title}</h1>
+      <span>{frontmatter?.date}</span>
+      <div dangerouslySetInnerHTML={{ __html: html ?? '' }} />
     </Layout>
   )
 }
 
-export const pageQuery = graphql`
-  query ($id: String!) {
+export const query = graphql`
+  query BlogTemplate($id: String!) {
     markdownRemark(id: { eq: $id }) {
       id
       html

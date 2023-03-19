@@ -2,6 +2,7 @@
 slug: '/post-2'
 date: '2023-03-13'
 title: 'The great GatsbyJS project'
+tags: ['Introduction', 'Development', 'Gatsby', 'DevOps']
 ---
 
 ## Introduction
