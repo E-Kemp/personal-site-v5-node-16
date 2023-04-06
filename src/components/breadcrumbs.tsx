@@ -10,9 +10,9 @@ type BreadcrumbsProps = {
 
 const Breadcrumbs = (props: BreadcrumbsProps) => {
   return (
-    <ul className="m-0 flex flex-row p-0">
+    <ul className="m-0 inline-flex list-none p-0">
       {props.crumbs.map((crumb, index) => (
-        <>
+        <li>
           {crumb.to ? (
             <Link to={crumb.to} aria-label={crumb.label}>
               {crumb.label}
@@ -21,7 +21,7 @@ const Breadcrumbs = (props: BreadcrumbsProps) => {
             <span>{crumb.label}</span>
           )}
           {index !== props.crumbs.length - 1 && <span className="mx-2">/</span>}
-        </>
+        </li>
       ))}
     </ul>
   )

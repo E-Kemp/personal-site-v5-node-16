@@ -1,0 +1,2 @@
+{"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^\\QAs a frontend developer I was naively ready to exclude users that aren't able to access JavaScript with this idea that it was required with the web framework we use at eLife.\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^\\QIt built an internalised expectation on the user that JavaScript is always enabled and working by default - without considering otherwise.\\E$"}
