@@ -56,7 +56,7 @@ const BlogPostTemplate = ({ data }: PageProps<Queries.BlogTemplateQuery>) => {
             title={`Elliot Jordan Kemp${
               frontmatter?.title && ` | ${frontmatter?.title}`
             }`}
-            url={`https://elliotjordankemp.com/${frontmatter?.slug}`}
+            url={`https://elliotjordankemp.com${frontmatter?.slug}`}
           />
         </Dialog.Panel>
       </Dialog>
