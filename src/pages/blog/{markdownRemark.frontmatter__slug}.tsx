@@ -1,13 +1,10 @@
 import * as React from 'react'
 import { graphql, PageProps, HeadFC, Link } from 'gatsby'
-import { Layout } from '../../components'
+import { Layout, MyLink } from '../../components'
 import { Dialog } from '@headlessui/react'
 import Share from '../../assets/share.svg'
-import Copy from '../../assets/copy.svg'
-import Facebook from '../../assets/facebook.svg'
-import Reddit from '../../assets/reddit.svg'
-import LinkedIn from '../../assets/linkedin.svg'
 import XMark from '../../assets/xmark.svg'
+import { ShareLinks } from '../../components/shareLinks'
 
 const BlogPostTemplate = ({ data }: PageProps<Queries.BlogTemplateQuery>) => {
   const { markdownRemark } = data
@@ -55,28 +52,12 @@ const BlogPostTemplate = ({ data }: PageProps<Queries.BlogTemplateQuery>) => {
             </button>
           </div>
 
-          <ul className="m-0 mt-2 list-none space-y-1 p-0">
-            <li>
-              <a className="inline-flex items-center hover:underline">
-                <Copy className="mr-2 h-4" /> Copy to clipboard
-              </a>
-            </li>
-            <li>
-              <a className="inline-flex items-center hover:underline">
-                <Facebook className="mr-2 h-4" /> Facebook
-              </a>
-            </li>
-            <li>
-              <a className="inline-flex items-center hover:underline">
-                <LinkedIn className="mr-2 h-4" /> LinkedIn
-              </a>
-            </li>
-            <li>
-              <a className="inline-flex items-center hover:underline">
-                <Reddit className="mr-2 h-4" /> Reddit
-              </a>
-            </li>
-          </ul>
+          <ShareLinks
+            title={`Elliot Jordan Kemp${
+              frontmatter?.title && ` | ${frontmatter?.title}`
+            }`}
+            url={window.location.href}
+          />
         </Dialog.Panel>
       </Dialog>
     </>
