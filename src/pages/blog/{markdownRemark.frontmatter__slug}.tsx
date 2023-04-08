@@ -20,19 +20,27 @@ const BlogPostTemplate = ({ data }: PageProps<Queries.BlogTemplateQuery>) => {
   ]
   const [isOpen, setIsOpen] = React.useState(false)
 
+  const setOpenHandler = (
+    event: React.MouseEvent<HTMLAnchorElement, MouseEvent>
+  ) => {
+    event.preventDefault()
+    setIsOpen(true)
+  }
+
   return (
     <>
       <Layout breadcrumbs={crumbs}>
         <h1 className="mt-5 mb-2">{frontmatter?.title}</h1>
         <div className="flex min-w-full flex-row items-center justify-between">
           <span>{frontmatter?.date}</span>
-          <button
-            onClick={() => setIsOpen(true)}
+          <Link
+            onClick={(e) => setOpenHandler(e)}
             className="inline-flex items-center hover:underline"
+            to={`/blog${frontmatter?.slug}/share`}
           >
             <Share className="mr-2 h-4" />
             Share
-          </button>
+          </Link>
         </div>
         <div dangerouslySetInnerHTML={{ __html: html ?? '' }} />{' '}
       </Layout>
@@ -84,7 +92,4 @@ export const Head: HeadFC = ({ data }) => {
   const { markdownRemark }: any = data
   const { frontmatter } = markdownRemark
   return <title>{`Blog: ${frontmatter.title}`}</title>
-}
-function useState(arg0: boolean): [any, any] {
-  throw new Error('Function not implemented.')
 }

@@ -38,30 +38,36 @@ export const ShareLinks = ({ title, url }: ShareLinksProps) => {
           </button>
         )}
       </li>
-      <li>
-        <MyLink
-          className="inline-flex items-center hover:underline"
-          href={`https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}&t=${encodedTitle}`}
-        >
-          <Facebook className="mr-2 h-4" /> Facebook
-        </MyLink>
-      </li>
-      <li>
-        <MyLink
-          className="inline-flex items-center hover:underline"
-          href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}&title=${encodedTitle}`}
-        >
-          <LinkedIn className="mr-2 h-4" /> LinkedIn
-        </MyLink>
-      </li>
-      <li>
-        <MyLink
-          className="inline-flex items-center hover:underline"
-          href={`http://www.reddit.com/submit?url=${encodedUrl}&title=${encodedTitle}`}
-        >
-          <Reddit className="mr-2 h-4" /> Reddit
-        </MyLink>
-      </li>
+      <BaseLinks title={encodedTitle} url={encodedUrl} />
     </ul>
   )
 }
+
+export const BaseLinks = ({ title, url }: ShareLinksProps) => (
+  <>
+    <li>
+      <MyLink
+        className="inline-flex items-center hover:underline"
+        href={`https://www.facebook.com/sharer/sharer.php?u=${url}&t=${title}`}
+      >
+        <Facebook className="mr-2 h-4" /> Facebook
+      </MyLink>
+    </li>
+    <li>
+      <MyLink
+        className="inline-flex items-center hover:underline"
+        href={`https://www.linkedin.com/sharing/share-offsite/?url=${url}&title=${title}`}
+      >
+        <LinkedIn className="mr-2 h-4" /> LinkedIn
+      </MyLink>
+    </li>
+    <li>
+      <MyLink
+        className="inline-flex items-center hover:underline"
+        href={`http://www.reddit.com/submit?url=${url}&title=${title}`}
+      >
+        <Reddit className="mr-2 h-4" /> Reddit
+      </MyLink>
+    </li>
+  </>
+)
