@@ -2,8 +2,7 @@ import { Link } from 'gatsby'
 import React from 'react'
 import { Breadcrumbs } from './breadcrumbs'
 import { Footer } from './footer'
-import './layout.css'
-import Brush from '../assets/brush.svg'
+import './layout.scss'
 
 type Breadcrumb = {
   label: string
@@ -33,7 +32,7 @@ const Layout = ({ children, breadcrumbs, hc, vc }: Props) => {
         </div>
         {breadcrumbs && <Breadcrumbs crumbs={breadcrumbs} />}
         <div
-          className={`flex flex-col ${vc ? 'justify-center' : null} ${
+          className={`flex flex-grow flex-col ${vc ? 'justify-center' : null} ${
             hc ? 'items-center' : null
           }`}
         >
