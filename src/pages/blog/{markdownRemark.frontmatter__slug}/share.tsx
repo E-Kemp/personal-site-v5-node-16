@@ -1,7 +1,12 @@
 import * as React from 'react'
 import { graphql, PageProps, HeadFC, Link } from 'gatsby'
-import { Layout } from '../../../components'
-import { BaseLinks, ShareLinks } from '../../../components/shareLinks'
+import {
+  Layout,
+  FacebookLink,
+  LinkedInLink,
+  RedditLink
+} from '../../../components'
+import { useMemo } from 'react'
 
 const BlogPostTemplate = ({ data }: PageProps<Queries.ShareTemplateQuery>) => {
   const { markdownRemark } = data
@@ -13,16 +18,34 @@ const BlogPostTemplate = ({ data }: PageProps<Queries.ShareTemplateQuery>) => {
     { label: 'Share' }
   ]
 
+  const title = useMemo(
+    () =>
+      `Elliot Jordan Kemp${frontmatter?.title && ` | ${frontmatter?.title}`}`,
+    [frontmatter?.title]
+  )
+
+  const url = useMemo(
+    () => `https://elliotjordankemp.com/blog${frontmatter?.slug}`,
+    [frontmatter?.slug]
+  )
+
   return (
     <Layout breadcrumbs={crumbs}>
       <h1 className="mt-5 mb-2">{frontmatter?.title}</h1>
-      <p>You can share this blog post with the following links</p>
-      <BaseLinks
-        title={`Elliot Jordan Kemp${
-          frontmatter?.title && ` | ${frontmatter?.title}`
-        }`}
-        url={`https://elliotjordankemp.com/blog${frontmatter?.slug}`}
-      />
+      <p className="mb-0">
+        You can share this blog post with the following links
+      </p>
+      <ul className="my-0 list-none space-y-1 p-0">
+        <li>
+          <FacebookLink title={title} url={url} />
+        </li>
+        <li>
+          <LinkedInLink title={title} url={url} />
+        </li>
+        <li>
+          <RedditLink title={title} url={url} />
+        </li>
+      </ul>
     </Layout>
   )
 }

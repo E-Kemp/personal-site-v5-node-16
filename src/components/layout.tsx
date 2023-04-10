@@ -13,9 +13,10 @@ type Props = {
   breadcrumbs?: Breadcrumb[]
   hc?: boolean
   vc?: boolean
+  topThird?: boolean
 }
 
-const Layout = ({ children, breadcrumbs, hc, vc }: Props) => {
+const Layout = ({ children, breadcrumbs, hc, vc, topThird }: Props) => {
   return (
     <div className="flex min-h-screen flex-col items-center">
       <div className="prose prose-slate flex w-full grow flex-col p-5">
@@ -32,11 +33,12 @@ const Layout = ({ children, breadcrumbs, hc, vc }: Props) => {
         </div>
         {breadcrumbs && <Breadcrumbs crumbs={breadcrumbs} />}
         <div
-          className={`flex flex-grow flex-col ${vc ? 'justify-center' : null} ${
-            hc ? 'items-center' : null
-          }`}
+          className={`flex flex-grow flex-col ${vc ? 'justify-evenly' : null}`}
         >
-          {children}
+          <div className={`flex flex-col ${hc ? 'items-center' : null}`}>
+            {children}
+          </div>
+          {topThird && <div />}
         </div>
       </div>
       <Footer />

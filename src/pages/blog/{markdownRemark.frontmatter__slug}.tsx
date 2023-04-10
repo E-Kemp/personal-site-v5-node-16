@@ -1,10 +1,9 @@
 import * as React from 'react'
 import { graphql, PageProps, HeadFC, Link } from 'gatsby'
-import { Layout, MyLink } from '../../components'
+import { Layout, ShareLinks } from '../../components'
 import { Dialog } from '@headlessui/react'
 import Share from '../../assets/share.svg'
 import XMark from '../../assets/xmark.svg'
-import { ShareLinks } from '../../components/shareLinks'
 
 const BlogPostTemplate = ({ data }: PageProps<Queries.BlogTemplateQuery>) => {
   const { markdownRemark } = data

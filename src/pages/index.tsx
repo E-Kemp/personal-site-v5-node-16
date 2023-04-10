@@ -4,7 +4,7 @@ import { Layout, MyLink } from '../components'
 
 const IndexPage: React.FC<PageProps> = () => {
   return (
-    <Layout hc vc>
+    <Layout hc vc topThird>
       <h3 className="mb-5 mt-0">This is where I do things.</h3>
       <div className="flex flex-col rounded-lg border-slate-800 bg-slate-600 p-5 text-white">
         <p className="mb-3 mt-0">Why not look at these things?</p>
