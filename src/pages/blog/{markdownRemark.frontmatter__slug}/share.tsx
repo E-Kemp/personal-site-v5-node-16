@@ -20,12 +20,17 @@ const BlogPostTemplate = ({ data }: PageProps<Queries.ShareTemplateQuery>) => {
 
   const title = useMemo(
     () =>
-      `Elliot Jordan Kemp${frontmatter?.title && ` | ${frontmatter?.title}`}`,
+      encodeURIComponent(
+        `Elliot Jordan Kemp${frontmatter?.title && ` | ${frontmatter?.title}`}`
+      ),
     [frontmatter?.title]
   )
 
   const url = useMemo(
-    () => `https://elliotjordankemp.com/blog${frontmatter?.slug}`,
+    () =>
+      encodeURIComponent(
+        `https://elliotjordankemp.com/blog${frontmatter?.slug}`
+      ),
     [frontmatter?.slug]
   )
 
