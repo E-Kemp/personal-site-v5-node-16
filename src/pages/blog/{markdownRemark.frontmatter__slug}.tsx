@@ -10,10 +10,7 @@ const BlogPostTemplate = ({ data }: PageProps<Queries.BlogTemplateQuery>) => {
   const frontmatter = markdownRemark?.frontmatter ?? null
   const html = markdownRemark?.html ?? null
   const crumbs = [
-    {
-      label: 'Home',
-      to: '/'
-    },
+    { label: 'Home', to: '/' },
     { label: 'Blog', to: '/blog' },
     { label: frontmatter?.title ?? '' }
   ]
@@ -29,19 +26,21 @@ const BlogPostTemplate = ({ data }: PageProps<Queries.BlogTemplateQuery>) => {
   return (
     <>
       <Layout breadcrumbs={crumbs}>
-        <h1 className="mt-5 mb-2">{frontmatter?.title}</h1>
-        <div className="flex min-w-full flex-row items-center justify-between">
-          <span>{frontmatter?.date}</span>
-          <Link
-            onClick={(e) => setOpenHandler(e)}
-            className="inline-flex items-center hover:underline"
-            to={`/blog${frontmatter?.slug}/share`}
-          >
-            <Share className="mr-2 h-4" />
-            Share
-          </Link>
+        <div className="prose prose-slate w-full">
+          <h1 className="mt-5 mb-2">{frontmatter?.title}</h1>
+          <div className="flex min-w-full flex-row items-center justify-between">
+            <span>{frontmatter?.date}</span>
+            <Link
+              onClick={(e) => setOpenHandler(e)}
+              className="inline-flex items-center hover:underline"
+              to={`/blog${frontmatter?.slug}/share`}
+            >
+              <Share className="mr-2 h-4" />
+              Share
+            </Link>
+          </div>
+          <div dangerouslySetInnerHTML={{ __html: html ?? '' }} />
         </div>
-        <div dangerouslySetInnerHTML={{ __html: html ?? '' }} />{' '}
       </Layout>
       <Dialog
         as="div"

@@ -19,25 +19,25 @@ type Props = {
 const Layout = ({ children, breadcrumbs, hc, vc, topThird }: Props) => {
   return (
     <div className="flex min-h-screen flex-col items-center">
-      <div className="prose prose-slate flex w-full grow flex-col p-5">
-        <div className="flex flex-col items-center">
+      <div className="flex w-full grow flex-col items-center p-5">
+        <div className="prose prose-slate flex w-full flex-col">
           <Link
             to="/"
-            className="no-underline"
+            className="text-center no-underline"
             aria-label="Back to the homepage"
           >
             <h1 className="my-5">
               Elliot Jordan Kemp <span className="text-slate-500">/</span>
             </h1>
           </Link>
+          {breadcrumbs && <Breadcrumbs crumbs={breadcrumbs} />}
         </div>
-        {breadcrumbs && <Breadcrumbs crumbs={breadcrumbs} />}
         <div
-          className={`flex flex-grow flex-col ${vc ? 'justify-evenly' : null}`}
+          className={`flex w-full flex-grow flex-col items-center ${
+            vc ? 'justify-evenly' : null
+          }`}
         >
-          <div className={`flex flex-col ${hc ? 'items-center' : null}`}>
-            {children}
-          </div>
+          {children}
           {topThird && <div />}
         </div>
       </div>

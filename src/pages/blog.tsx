@@ -30,78 +30,79 @@ const BlogPage = ({ data }: PageProps<Queries.BlogPageQuery>) => {
   }, [])
 
   return (
-    <Layout breadcrumbs={crumbs}>
-      <h1 className="mt-5 mb-2">Blog</h1>
-      <div id="hide-js">
-        <h3 className="m-0 mt-2">
-          <button
-            onClick={() => setFilterOpenState(!filterOpenState)}
-            className="inline-flex items-center"
+    <Layout breadcrumbs={crumbs} hc>
+      <div className="prose prose-slate w-full">
+        <h1 className="mt-5 mb-2">Blog</h1>
+        <div id="hide-js">
+          <h3 className="m-0 mt-2">
+            <button
+              onClick={() => setFilterOpenState(!filterOpenState)}
+              className="inline-flex items-center"
+            >
+              Tags
+              <FontAwesomeIcon
+                className="ml-2 h-5 text-slate-600"
+                icon={filterOpenState ? faCircleChevronUp : faCircleChevronDown}
+              />
+            </button>
+          </h3>
+          <Transition
+            show={filterOpenState}
+            enter="transition duration-100 ease-out"
+            enterFrom="transform scale-20 opacity-0"
+            enterTo="transform scale-100 opacity-100"
+            leave="transition duration-75 ease-out"
+            leaveFrom="transform scale-100 opacity-100"
+            leaveTo="transform scale-20 opacity-0"
           >
-            Tags
-            <FontAwesomeIcon
-              className="ml-2 h-5 text-slate-600"
-              icon={filterOpenState ? faCircleChevronUp : faCircleChevronDown}
-            />
-          </button>
-        </h3>
-        <Transition
-          show={filterOpenState}
-          enter="transition duration-100 ease-out"
-          enterFrom="transform scale-20 opacity-0"
-          enterTo="transform scale-100 opacity-100"
-          leave="transition duration-75 ease-out"
-          leaveFrom="transform scale-100 opacity-100"
-          leaveTo="transform scale-20 opacity-0"
-        >
-          <ul className={`my-0 flex list-none flex-wrap justify-start p-0`}>
-            {tags.map((tag) => (
-              <li key={tag} className="my-1 mr-2 pl-0">
-                <button onClick={() => setFilter(tag)}>
-                  {!!!filter.includes(tag) ? (
-                    <Chip>{tag}</Chip>
-                  ) : (
-                    <InvertedChip>{tag}</InvertedChip>
-                  )}
-                </button>
-              </li>
-            ))}
-          </ul>
-        </Transition>
-      </div>
-
-      <ul className="mt-5">
-        {posts
-          .filter(
-            ({ frontmatter: post }) =>
-              filter.length === 0 ||
-              post?.tags?.some((pTag) => filter.some((fTag) => pTag === fTag))
-          )
-          .map(({ frontmatter }) =>
-            frontmatter ? (
-              <li className="mb-5">
-                <Link
-                  key={frontmatter.title}
-                  to={`/blog${frontmatter.slug}`}
-                  aria-label={frontmatter.title ?? ''}
-                >
-                  {frontmatter.title}
-                </Link>
-                {' / '}
-                {frontmatter.date}
-                <div className="mt-1 flex flex-row">
-                  {frontmatter.tags?.map((tag) =>
-                    tag && !!!filter.includes(tag) ? (
+            <ul className={`my-0 flex list-none flex-wrap justify-start p-0`}>
+              {tags.map((tag) => (
+                <li key={tag} className="my-1 mr-2 pl-0">
+                  <button onClick={() => setFilter(tag)}>
+                    {!!!filter.includes(tag) ? (
                       <Chip>{tag}</Chip>
                     ) : (
                       <InvertedChip>{tag}</InvertedChip>
-                    )
-                  )}
-                </div>
-              </li>
-            ) : null
-          )}
-      </ul>
+                    )}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </Transition>
+        </div>
+        <ul className="mt-5">
+          {posts
+            .filter(
+              ({ frontmatter: post }) =>
+                filter.length === 0 ||
+                post?.tags?.some((pTag) => filter.some((fTag) => pTag === fTag))
+            )
+            .map(({ frontmatter }) =>
+              frontmatter ? (
+                <li className="mb-5">
+                  <Link
+                    key={frontmatter.title}
+                    to={`/blog${frontmatter.slug}`}
+                    aria-label={frontmatter.title ?? ''}
+                  >
+                    {frontmatter.title}
+                  </Link>
+                  {' / '}
+                  {frontmatter.date}
+                  <div className="mt-1 flex flex-row">
+                    {frontmatter.tags?.map((tag) =>
+                      tag && !!!filter.includes(tag) ? (
+                        <Chip>{tag}</Chip>
+                      ) : (
+                        <InvertedChip>{tag}</InvertedChip>
+                      )
+                    )}
+                  </div>
+                </li>
+              ) : null
+            )}
+        </ul>
+      </div>
     </Layout>
   )
 }
@@ -124,15 +125,4 @@ export const pageQuery = graphql`
 
 export default BlogPage
 
-export const Head: HeadFC = () => (
-  <>
-    <title>Blog</title>
-    <style>
-      {`
-          .hide-js {
-            display: none;
-          }
-        `}
-    </style>
-  </>
-)
+export const Head: HeadFC = () => <title>Blog</title>

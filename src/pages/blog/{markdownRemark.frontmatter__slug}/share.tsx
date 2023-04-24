@@ -36,21 +36,23 @@ const BlogPostTemplate = ({ data }: PageProps<Queries.ShareTemplateQuery>) => {
 
   return (
     <Layout breadcrumbs={crumbs}>
-      <h1 className="mt-5 mb-2">{frontmatter?.title}</h1>
-      <p className="mb-0">
-        You can share this blog post with the following links
-      </p>
-      <ul className="my-0 list-none space-y-1 p-0">
-        <li>
-          <FacebookLink title={title} url={url} />
-        </li>
-        <li>
-          <LinkedInLink title={title} url={url} />
-        </li>
-        <li>
-          <RedditLink title={title} url={url} />
-        </li>
-      </ul>
+      <div className="prose prose-slate w-full">
+        <h1 className="mt-5 mb-2">{frontmatter?.title}</h1>
+        <p className="mb-0">
+          You can share this blog post with the following links
+        </p>
+        <ul className="my-0 list-none space-y-1 p-0 prose-a:my-0">
+          <li>
+            <FacebookLink title={title} url={url} />
+          </li>
+          <li>
+            <LinkedInLink title={title} url={url} />
+          </li>
+          <li>
+            <RedditLink title={title} url={url} />
+          </li>
+        </ul>
+      </div>
     </Layout>
   )
 }
