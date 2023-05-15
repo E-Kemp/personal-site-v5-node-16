@@ -55,7 +55,9 @@ const BlogPage = ({ data }: PageProps<Queries.BlogPageQuery>) => {
             leaveFrom="transform scale-100 opacity-100"
             leaveTo="transform scale-20 opacity-0"
           >
-            <ul className={`my-0 flex list-none flex-wrap justify-start p-0`}>
+            <ul
+              className={`my-0 flex w-full list-none flex-wrap justify-start p-0`}
+            >
               {tags.map((tag) => (
                 <li key={tag} className="my-1 mr-2 pl-0">
                   <button onClick={() => setFilter(tag)}>
@@ -70,7 +72,7 @@ const BlogPage = ({ data }: PageProps<Queries.BlogPageQuery>) => {
             </ul>
           </Transition>
         </div>
-        <ul className="mt-5">
+        <ul className="mt-5 list-none p-0">
           {posts
             .filter(
               ({ frontmatter: post }) =>
@@ -89,15 +91,17 @@ const BlogPage = ({ data }: PageProps<Queries.BlogPageQuery>) => {
                   </Link>
                   {' / '}
                   {frontmatter.date}
-                  <div className="mt-1 flex flex-row">
-                    {frontmatter.tags?.map((tag) =>
-                      tag && !!!filter.includes(tag) ? (
-                        <Chip>{tag}</Chip>
-                      ) : (
-                        <InvertedChip>{tag}</InvertedChip>
-                      )
-                    )}
-                  </div>
+                  <ul className="my-0 flex w-full list-none flex-row flex-wrap justify-start p-0">
+                    {frontmatter.tags?.map((tag) => (
+                      <li key={tag} className="my-1 mr-2 pl-0">
+                        {tag && !!!filter.includes(tag) ? (
+                          <Chip>{tag}</Chip>
+                        ) : (
+                          <InvertedChip>{tag}</InvertedChip>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
                 </li>
               ) : null
             )}
