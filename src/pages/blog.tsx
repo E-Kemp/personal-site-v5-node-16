@@ -11,8 +11,20 @@ import { Transition } from '@headlessui/react'
 import '../styles/blog.scss'
 
 const BlogPage = ({ data }: PageProps<Queries.BlogPageQuery>) => {
-  const { allMarkdownRemark } = data
-  const { posts, tags } = allMarkdownRemark
+  const { allMarkdownRemark, allMdx } = data
+  const posts = [...allMarkdownRemark.posts, ...allMdx.posts].sort((a, b) => {
+    if(a.frontmatter?.date && b.frontmatter?.date) 
+      return new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime()
+    return 0
+  })
+  const dataTags = [...allMarkdownRemark.tags, ...allMdx.tags]
+  const tags: string[] = []
+  dataTags.forEach(element => {
+    if(!tags.includes(element)) tags.push(element)
+  })
+  tags.sort()
+  
+  
   const crumbs = [
     {
       label: 'Home',
@@ -114,6 +126,17 @@ const BlogPage = ({ data }: PageProps<Queries.BlogPageQuery>) => {
 export const pageQuery = graphql`
   query BlogPage {
     allMarkdownRemark(sort: { fields: frontmatter___date, order: DESC }) {
+      tags: distinct(field: frontmatter___tags)
+      posts: nodes {
+        frontmatter {
+          date(formatString: "MMMM DD, YYYY")
+          slug
+          title
+          tags
+        }
+      }
+    }
+    allMdx(sort: {fields: frontmatter___date, order: DESC}) {
       tags: distinct(field: frontmatter___tags)
       posts: nodes {
         frontmatter {

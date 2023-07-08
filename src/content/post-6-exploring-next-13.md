@@ -21,4 +21,10 @@ This will make progressive enhancement much easier, as we can make the user's br
 
 ## Implementation
 
-What better way to implement this new version of NextJS than migrating this very blog! Over time, this website will change over to NextJS,
+What better way to implement this new version of NextJS than migrating this very blog! ~~Over time, this website will change over to NextJS.~~
+
+--------------------------------
+
+## Edits
+
+**07/07/2023:** I didn't switch to NextJS, it's overcomplicated for even a blog, Gatsby is so blazingly fast, and I'd rather focus on making posts (for now...)
